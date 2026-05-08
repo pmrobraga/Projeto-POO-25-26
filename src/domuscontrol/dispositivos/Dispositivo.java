@@ -24,9 +24,9 @@ public abstract class Dispositivo implements Operavel, Serializable {
     private boolean ligado;
 
     // --- Estatísticas ---
-    private int numeroActivacoes;
+    private int numeroAtivacoes;
     private long tempoLigadoMinutos; // total acumulado
-    private LocalDateTime ultimaActivacao;
+    private LocalDateTime ultimaAtivacao;
 
     // -------------------------------------------------------------------------
     // Construtor
@@ -47,9 +47,9 @@ public abstract class Dispositivo implements Operavel, Serializable {
         this.modelo = modelo;
         this.consumoPorHora = consumoPorHora;
         this.ligado = false;
-        this.numeroActivacoes = 0;
+        this.numeroAtivacoes = 0;
         this.tempoLigadoMinutos = 0;
-        this.ultimaActivacao = null;
+        this.ultimaAtivacao = null;
     }
 
     // -------------------------------------------------------------------------
@@ -60,8 +60,8 @@ public abstract class Dispositivo implements Operavel, Serializable {
     public void ligar() {
         if (!ligado) {
             ligado = true;
-            numeroActivacoes++;
-            ultimaActivacao = LocalDateTime.now();
+            numeroAtivacoes++;
+            ultimaAtivacao = LocalDateTime.now();
         }
     }
 
@@ -69,8 +69,8 @@ public abstract class Dispositivo implements Operavel, Serializable {
     public void desligar() {
         if (ligado) {
             ligado = false;
-            if (ultimaActivacao != null) {
-                long minutos = Duration.between(ultimaActivacao, LocalDateTime.now()).toMinutes();
+            if (ultimaAtivacao != null) {
+                long minutos = Duration.between(ultimaAtivacao, LocalDateTime.now()).toMinutes();
                 tempoLigadoMinutos += minutos;
             }
         }
@@ -115,9 +115,9 @@ public abstract class Dispositivo implements Operavel, Serializable {
     public String getMarca()            { return marca; }
     public String getModelo()           { return modelo; }
     public double getConsumoPorHora()   { return consumoPorHora; }
-    public int getNumeroActivacoes()    { return numeroActivacoes; }
+    public int getNumeroActivacoes()    { return numeroAtivacoes; }
     public long getTempoLigadoMinutos() { return tempoLigadoMinutos; }
-    public LocalDateTime getUltimaActivacao() { return ultimaActivacao; }
+    public LocalDateTime getUltimaActivacao() { return ultimaAtivacao; }
 
     // -------------------------------------------------------------------------
     // toString / equals / hashCode
