@@ -19,9 +19,7 @@ public class ColunaDeSom extends Dispositivo {
         this.fonte = "Bluetooth";
     }
 
-    // -------------------------------------------------------------------------
-    // Operações específicas
-    // -------------------------------------------------------------------------
+    // Operações especificas
 
     public void setVolume(int volume) {
         if (volume < 0 || volume > 100)
@@ -43,16 +41,12 @@ public class ColunaDeSom extends Dispositivo {
         this.fonte = fonte;
     }
 
-    // -------------------------------------------------------------------------
     // Getters
-    // -------------------------------------------------------------------------
 
     public int getVolume()   { return volume; }
     public String getFonte() { return fonte; }
 
-    // -------------------------------------------------------------------------
     // Estado detalhado
-    // -------------------------------------------------------------------------
 
     @Override
     public String getEstadoDetalhado() {

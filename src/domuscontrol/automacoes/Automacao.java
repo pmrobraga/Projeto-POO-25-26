@@ -7,13 +7,13 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Uma Automação associa uma Condição a uma lista de Acções.
+ * Uma Automaçao associa uma Condiçao a uma lista de Acoes.
  *
- * Quando a condição se verifica, todas as acções são executadas.
+ * Quando a condiçao se verifica, todas as acoes são executadas.
  *
  * Exemplo:
  *   Condição: luminosidade < 100 lux
- *   Acções:   ligar lâmpada sala, abrir cortinas
+ *   Açoes:   ligar lâmpada sala, abrir cortinas
  */
 public class Automacao implements Serializable {
 
@@ -30,9 +30,7 @@ public class Automacao implements Serializable {
     private LocalDateTime ultimaExecucao;
     private int numeroExecucoes;
 
-    // -------------------------------------------------------------------------
     // Construtor
-    // -------------------------------------------------------------------------
 
     public Automacao(String id, String nome, String descricao, Condicao condicao) {
         if (id == null || id.isBlank())
@@ -51,9 +49,7 @@ public class Automacao implements Serializable {
         this.numeroExecucoes = 0;
     }
 
-    // -------------------------------------------------------------------------
     // Gestão de açoes
-    // -------------------------------------------------------------------------
 
     public void adicionarAcao(Acao acao) {
         if (acao == null) throw new IllegalArgumentException("Acção não pode ser nula.");
@@ -64,13 +60,11 @@ public class Automacao implements Serializable {
         return Collections.unmodifiableList(acoes);
     }
 
-    // -------------------------------------------------------------------------
     // Avaliação e execução
-    // -------------------------------------------------------------------------
 
     /**
-     * Verifica a condição e, se verdadeira, executa todas as acções.
-     * @return true se a automação foi disparada.
+     * Verifica a condiçao e, se verdadeira, executa todas as açoes.
+     * @return true se a automaçao foi disparada.
      */
     public boolean avaliarEExecutar() {
         if (!ativa) return false;
@@ -83,9 +77,7 @@ public class Automacao implements Serializable {
         return false;
     }
 
-    // -------------------------------------------------------------------------
     // Getters / Setters
-    // -------------------------------------------------------------------------
 
     public String getId()               { return id; }
     public String getNome()             { return nome; }
@@ -95,17 +87,16 @@ public class Automacao implements Serializable {
     public int getNumeroExecucoes()     { return numeroExecucoes; }
     public LocalDateTime getUltimaExecucao() { return ultimaExecucao; }
 
-    public void setActiva(boolean ativa)    { this.ativa = ativa; }
+    public void setAtiva(boolean ativa)    { this.ativa = ativa; }
     public void setNome(String nome)         { this.nome = nome; }
     public void setDescricao(String desc)    { this.descricao = desc; }
 
-    // -------------------------------------------------------------------------
+
     // toString
-    // -------------------------------------------------------------------------
 
     @Override
     public String toString() {
-        return String.format("Automação [%s] '%s' | Condição: %s | Acções: %d | %s",
+        return String.format("Automação [%s] '%s' | Condição: %s | Ações: %d | %s",
                 id, nome, condicao.descrever(), acoes.size(),
                 ativa ? "ATIVA" : "INATIVA");
     }

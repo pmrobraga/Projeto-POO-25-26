@@ -22,9 +22,7 @@ public class Casa implements Serializable {
 
     private final List<Divisao> divisoes;
 
-    // -------------------------------------------------------------------------
     // Construtor
-    // -------------------------------------------------------------------------
 
     public Casa(String id, String nome, String morada) {
         if (id == null || id.isBlank())
@@ -38,9 +36,7 @@ public class Casa implements Serializable {
         this.divisoes = new ArrayList<>();
     }
 
-    // -------------------------------------------------------------------------
     // Gestão de divisões
-    // -------------------------------------------------------------------------
 
     public void adicionarDivisao(Divisao d) throws DivisaoJaExisteException {
         if (d == null) throw new IllegalArgumentException("Divisão não pode ser nula.");
@@ -66,9 +62,7 @@ public class Casa implements Serializable {
         return Collections.unmodifiableList(divisoes);
     }
 
-    // -------------------------------------------------------------------------
     // Acesso a dispositivos globalmente na casa
-    // -------------------------------------------------------------------------
 
     public Dispositivo getDispositivoPorId(String idDispositivo) throws DispositivoNaoEncontradoException {
         for (Divisao div : divisoes) {
@@ -86,21 +80,17 @@ public class Casa implements Serializable {
         return Collections.unmodifiableList(todos);
     }
 
-    // -------------------------------------------------------------------------
     // Consumos
-    // -------------------------------------------------------------------------
 
     public double getConsumoTotal() {
         return divisoes.stream().mapToDouble(Divisao::getConsumoTotal).sum();
     }
 
-    public double getConsumoPorHoraActual() {
-        return divisoes.stream().mapToDouble(Divisao::getConsumoPorHoraActual).sum();
+    public double getConsumoPorHoraAtual() {
+        return divisoes.stream().mapToDouble(Divisao::getConsumoPorHoraAtual).sum();
     }
 
-    // -------------------------------------------------------------------------
     // Top 3 divisões com mais dispositivos
-    // -------------------------------------------------------------------------
 
     public List<Divisao> getTopDivisoesPorNumeroDispositivos(int n) {
         List<Divisao> copia = new ArrayList<>(divisoes);
@@ -108,9 +98,7 @@ public class Casa implements Serializable {
         return copia.subList(0, Math.min(n, copia.size()));
     }
 
-    // -------------------------------------------------------------------------
     // Getters / Setters
-    // -------------------------------------------------------------------------
 
     public String getId()      { return id; }
     public String getNome()    { return nome; }
@@ -124,9 +112,7 @@ public class Casa implements Serializable {
 
     public void setMorada(String morada) { this.morada = morada; }
 
-    // -------------------------------------------------------------------------
     // toString / equals / hashCode
-    // -------------------------------------------------------------------------
 
     @Override
     public String toString() {

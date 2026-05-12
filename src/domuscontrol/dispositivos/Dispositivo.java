@@ -28,9 +28,7 @@ public abstract class Dispositivo implements Operavel, Serializable {
     private long tempoLigadoMinutos; // total acumulado
     private LocalDateTime ultimaAtivacao;
 
-    // -------------------------------------------------------------------------
     // Construtor
-    // -------------------------------------------------------------------------
 
     public Dispositivo(String id, String marca, String modelo, double consumoPorHora) {
         if (id == null || id.isBlank())
@@ -52,9 +50,7 @@ public abstract class Dispositivo implements Operavel, Serializable {
         this.ultimaAtivacao = null;
     }
 
-    // -------------------------------------------------------------------------
     // Implementação de Operavel
-    // -------------------------------------------------------------------------
 
     @Override
     public void ligar() {
@@ -87,9 +83,7 @@ public abstract class Dispositivo implements Operavel, Serializable {
     @Override
     public abstract String getEstadoDetalhado();
 
-    // -------------------------------------------------------------------------
     // Simulação de tempo (para testes e avanço manual do relógio)
-    // -------------------------------------------------------------------------
 
     /**
      * Regista manualmente minutos de funcionamento (usado na simulação de tempo).
@@ -107,21 +101,17 @@ public abstract class Dispositivo implements Operavel, Serializable {
         return (tempoLigadoMinutos / 60.0) * consumoPorHora;
     }
 
-    // -------------------------------------------------------------------------
     // Getters
-    // -------------------------------------------------------------------------
 
     public String getId()               { return id; }
     public String getMarca()            { return marca; }
     public String getModelo()           { return modelo; }
     public double getConsumoPorHora()   { return consumoPorHora; }
-    public int getNumeroActivacoes()    { return numeroAtivacoes; }
+    public int getNumeroAtivacoes()    { return numeroAtivacoes; }
     public long getTempoLigadoMinutos() { return tempoLigadoMinutos; }
-    public LocalDateTime getUltimaActivacao() { return ultimaAtivacao; }
+    public LocalDateTime getUltimaAtivacao() { return ultimaAtivacao; }
 
-    // -------------------------------------------------------------------------
     // toString / equals / hashCode
-    // -------------------------------------------------------------------------
 
     @Override
     public String toString() {

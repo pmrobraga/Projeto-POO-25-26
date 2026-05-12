@@ -22,9 +22,7 @@ public class GestorAutomacoes implements Serializable {
     private final Map<String, Escalonamento> escalonamentos;
     private final Map<String, Cenario>      cenarios;
 
-    // -------------------------------------------------------------------------
     // Construtor
-    // -------------------------------------------------------------------------
 
     public GestorAutomacoes() {
         this.automacoes     = new LinkedHashMap<>();
@@ -32,9 +30,7 @@ public class GestorAutomacoes implements Serializable {
         this.cenarios       = new LinkedHashMap<>();
     }
 
-    // -------------------------------------------------------------------------
     // Automações
-    // -------------------------------------------------------------------------
 
     public void adicionarAutomacao(Automacao a) {
         if (a == null) throw new IllegalArgumentException("Automação não pode ser nula.");
@@ -60,9 +56,7 @@ public class GestorAutomacoes implements Serializable {
         return Collections.unmodifiableCollection(automacoes.values());
     }
 
-    // -------------------------------------------------------------------------
     // Escalonamentos
-    // -------------------------------------------------------------------------
 
     public void adicionarEscalonamento(Escalonamento e) {
         if (e == null) throw new IllegalArgumentException("Escalonamento não pode ser nulo.");
@@ -88,9 +82,7 @@ public class GestorAutomacoes implements Serializable {
         return Collections.unmodifiableCollection(escalonamentos.values());
     }
 
-    // -------------------------------------------------------------------------
     // Cenários
-    // -------------------------------------------------------------------------
 
     public void adicionarCenario(Cenario c) {
         if (c == null) throw new IllegalArgumentException("Cenário não pode ser nulo.");
@@ -116,15 +108,13 @@ public class GestorAutomacoes implements Serializable {
         return Collections.unmodifiableCollection(cenarios.values());
     }
 
-    // -------------------------------------------------------------------------
     // Tick do relógio — avalia todas as regras
-    // -------------------------------------------------------------------------
 
     /**
      * Chamado pelo DomusControl a cada avanço do relógio interno.
      * Avalia automações e escalonamentos, executando os que se aplicam.
      *
-     * @param agora Momento actual da simulação.
+     * @param agora Momento atual da simulação.
      */
     public void tick(LocalDateTime agora) {
         // Avaliar automações
@@ -144,9 +134,8 @@ public class GestorAutomacoes implements Serializable {
         }
     }
 
-    // -------------------------------------------------------------------------
+
     // toString
-    // -------------------------------------------------------------------------
 
     @Override
     public String toString() {

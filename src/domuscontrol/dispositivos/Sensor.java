@@ -21,9 +21,7 @@ public class Sensor extends Dispositivo {
         this.valorAtual = 0.0;
     }
 
-    // -------------------------------------------------------------------------
     // Leitura e escrita de valor
-    // -------------------------------------------------------------------------
 
     public void setValor(double valor) {
         this.valorAtual = valor;
@@ -36,9 +34,7 @@ public class Sensor extends Dispositivo {
     public String getUnidade()    { return unidade; }
     public String getTipoSensor() { return tipoSensor; }
 
-    // -------------------------------------------------------------------------
     // Estado detalhado
-    // -------------------------------------------------------------------------
 
     @Override
     public String getEstadoDetalhado() {

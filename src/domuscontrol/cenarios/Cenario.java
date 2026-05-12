@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Um Cenário agrupa um conjunto de acções a executar em simultâneo
+ * Um Cenário agrupa um conjunto de ações a executar em simultâneo
  * sobre vários dispositivos da casa.
  *
  * Exemplos predefinidos:
@@ -28,12 +28,10 @@ public class Cenario implements Serializable {
 
     private final List<Acao> acoes;
 
-    private LocalDateTime ultimaActivacao;
-    private int numeroActivacoes;
+    private LocalDateTime ultimaAtivacao;
+    private int numeroAtivacoes;
 
-    // -------------------------------------------------------------------------
     // Construtor
-    // -------------------------------------------------------------------------
 
     public Cenario(String id, String nome, String descricao) {
         if (id == null || id.isBlank())
@@ -45,15 +43,13 @@ public class Cenario implements Serializable {
         this.nome = nome;
         this.descricao = descricao;
         this.acoes = new ArrayList<>();
-        this.numeroActivacoes = 0;
+        this.numeroAtivacoes = 0;
     }
 
-    // -------------------------------------------------------------------------
-    // Gestão de acções
-    // -------------------------------------------------------------------------
+    // Gestão de ações
 
     public void adicionarAcao(Acao acao) {
-        if (acao == null) throw new IllegalArgumentException("Acção não pode ser nula.");
+        if (acao == null) throw new IllegalArgumentException("Ação não pode ser nula.");
         acoes.add(acao);
     }
 
@@ -61,41 +57,35 @@ public class Cenario implements Serializable {
         return Collections.unmodifiableList(acoes);
     }
 
-    // -------------------------------------------------------------------------
-    // Activação
-    // -------------------------------------------------------------------------
+    // Ativação
 
     /**
-     * Executa todas as acções do cenário pela ordem em que foram adicionadas.
+     * Executa todas as ações do cenário pela ordem em que foram adicionadas.
      */
-    public void activar() {
+    public void ativar() {
         acoes.forEach(Acao::executar);
-        ultimaActivacao = LocalDateTime.now();
-        numeroActivacoes++;
-        System.out.println("Cenário '" + nome + "' activado (" + acoes.size() + " acções executadas).");
+        ultimaAtivacao = LocalDateTime.now();
+        numeroAtivacoes++;
+        System.out.println("Cenário '" + nome + "' ativado (" + acoes.size() + " ações executadas).");
     }
 
-    // -------------------------------------------------------------------------
     // Getters / Setters
-    // -------------------------------------------------------------------------
 
     public String getId()                    { return id; }
     public String getNome()                  { return nome; }
     public String getDescricao()             { return descricao; }
-    public int getNumeroActivacoes()         { return numeroActivacoes; }
-    public LocalDateTime getUltimaActivacao(){ return ultimaActivacao; }
+    public int getNumeroAtivacoes()         { return numeroAtivacoes; }
+    public LocalDateTime getUltimaAtivacao(){ return ultimaAtivacao; }
 
     public void setNome(String nome)         { this.nome = nome; }
     public void setDescricao(String desc)    { this.descricao = desc; }
 
-    // -------------------------------------------------------------------------
     // toString
-    // -------------------------------------------------------------------------
 
     @Override
     public String toString() {
-        return String.format("Cenário [%s] '%s' — %s | Acções: %d | Activações: %d",
-                id, nome, descricao, acoes.size(), numeroActivacoes);
+        return String.format("Cenário [%s] '%s' — %s | Ações: %d | Ativações: %d",
+                id, nome, descricao, acoes.size(), numeroAtivacoes);
     }
 
     @Override

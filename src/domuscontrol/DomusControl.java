@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * Classe principal (fachada) do sistema DomusControl.
  *
- * É aqui que se centraliza toda a lógica de negócio:
+ * É aqui que se centraliza toda a lógica de:
  * criação de utilizadores, casas, divisões, associação de dispositivos,
  * estatísticas e serialização.
  *
@@ -39,9 +39,7 @@ public class DomusControl implements Serializable {
     // Simulação de tempo
     private LocalDateTime relogioInterno;
 
-    // -------------------------------------------------------------------------
     // Construtor privado (Singleton)
-    // -------------------------------------------------------------------------
 
     private DomusControl() {
         this.utilizadores   = new LinkedHashMap<>();
@@ -56,9 +54,7 @@ public class DomusControl implements Serializable {
         return instancia;
     }
 
-    // -------------------------------------------------------------------------
     // Gestão de Utilizadores
-    // -------------------------------------------------------------------------
 
     public Utilizador criarUtilizador(String id, String nome, String email, String password)
             throws UtilizadorJaExisteException {
@@ -80,9 +76,7 @@ public class DomusControl implements Serializable {
         return Collections.unmodifiableCollection(utilizadores.values());
     }
 
-    // -------------------------------------------------------------------------
     // Gestão de Casas
-    // -------------------------------------------------------------------------
 
     public Casa criarCasa(String id, String nome, String morada,
                           Utilizador proprietario)
@@ -106,9 +100,7 @@ public class DomusControl implements Serializable {
         return Collections.unmodifiableCollection(casas.values());
     }
 
-    // -------------------------------------------------------------------------
     // Gestão de Divisões
-    // -------------------------------------------------------------------------
 
     public Divisao criarDivisao(String idDivisao, String nomeDivisao,
                                 Casa casa, Utilizador quemPede)
@@ -121,9 +113,7 @@ public class DomusControl implements Serializable {
         return d;
     }
 
-    // -------------------------------------------------------------------------
     // Gestão de Dispositivos
-    // -------------------------------------------------------------------------
 
     public void registarDispositivo(Dispositivo d) {
         if (dispositivos.containsKey(d.getId()))
@@ -134,7 +124,7 @@ public class DomusControl implements Serializable {
     public void associarDispositivoADivisao(String idDispositivo, Casa casa,
                                             String idDivisao, Utilizador quemPede)
             throws PermissaoInsuficienteException, DivisaoNaoEncontradaException,
-                   DispositivoJaExisteException, DispositivoNaoEncontradoException {
+            DispositivoJaExisteException, DispositivoNaoEncontradoException {
         if (!quemPede.isAdministradorDe(casa))
             throw new PermissaoInsuficienteException("Sem permissão para adicionar dispositivos.");
         Dispositivo d = getDispositivoCatalogo(idDispositivo);
@@ -149,9 +139,7 @@ public class DomusControl implements Serializable {
         return d;
     }
 
-    // -------------------------------------------------------------------------
     // Estatísticas
-    // -------------------------------------------------------------------------
 
     /**
      * Retorna a casa que mais consumiu (em Wh totais acumulados).
@@ -174,9 +162,9 @@ public class DomusControl implements Serializable {
     /**
      * Top N dispositivos mais utilizados numa casa — por número de activações.
      */
-    public List<Dispositivo> getTopDispositivosPorActivacoes(Casa casa, int n) {
+    public List<Dispositivo> getTopDispositivosPorAtivacoes(Casa casa, int n) {
         return casa.getTodosDispositivos().stream()
-                .sorted((a, b) -> Integer.compare(b.getNumeroActivacoes(), a.getNumeroActivacoes()))
+                .sorted((a, b) -> Integer.compare(b.getNumeroAtivacoes(), a.getNumeroAtivacoes()))
                 .limit(n)
                 .collect(Collectors.toList());
     }
@@ -197,9 +185,7 @@ public class DomusControl implements Serializable {
         return pares.subList(0, Math.min(n, pares.size()));
     }
 
-    // -------------------------------------------------------------------------
     // Simulação de tempo
-    // -------------------------------------------------------------------------
 
     public LocalDateTime getRelogio() { return relogioInterno; }
 
@@ -224,9 +210,21 @@ public class DomusControl implements Serializable {
         return g;
     }
 
-    // -------------------------------------------------------------------------
+    // Reset do sistema
+
+    /**
+     * Limpa todos os dados do sistema.
+     * Usado para recarregar o estado de teste.
+     */
+    public void reset() {
+        utilizadores.clear();
+        casas.clear();
+        dispositivos.clear();
+        gestores.clear();
+        relogioInterno = LocalDateTime.now();
+    }
+
     // Serialização (gravar / carregar estado)
-    // -------------------------------------------------------------------------
 
     public void gravarEstado() throws IOException {
         gravarEstado(FICHEIRO_ESTADO);

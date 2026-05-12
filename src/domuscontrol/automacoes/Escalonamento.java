@@ -7,16 +7,16 @@ import java.time.LocalTime;
 import java.util.*;
 
 /**
- * Um Escalonamento define ações a executar com base no tempo.
+ * Um Escalonamento define açoes a executar com base no tempo
 
  * Pode ser:
- *  - Diário: executa todos os dias a uma determinada hora.
- *  - Semanal: executa em dias específicos da semana.
- *  - Num intervalo: ativo entre horaInicio e horaFim.
+ *  - Diário: executa todos os dias a uma determinada hora
+ *  - Semanal: executa em dias específicos da semana
+ *  - Num intervalo: ativo entre horaInicio e horaFim
 
  * Exemplos:
- *   - Todos os dias às 07:00, abrir cortinas.
- *   - De segunda a sexta, entre as 18:00 e as 23:00, ligar luzes da sala.
+ *   - Todos os dias às 07:00, abrir cortinas
+ *   - De segunda a sexta, entre as 18:00 e as 23:00, ligar luzes da sala
  */
 public class Escalonamento implements Serializable {
 
@@ -41,9 +41,7 @@ public class Escalonamento implements Serializable {
     private final List<Acao> acoes;
     private LocalDateTime ultimaExecucao;
 
-    // -------------------------------------------------------------------------
     // Construtores
-    // -------------------------------------------------------------------------
 
     /** Escalonamento diário — executa à mesma hora todos os dias. */
     public Escalonamento(String id, String nome, LocalTime horaExecucao) {
@@ -55,7 +53,7 @@ public class Escalonamento implements Serializable {
         this(id, nome, TipoEscalonamento.SEMANAL, horaExecucao, null, null, dias);
     }
 
-    /** Escalonamento por intervalo de horas — activo enquanto dentro do intervalo. */
+    /** Escalonamento por intervalo de horas — ativo enquanto dentro do intervalo. */
     public Escalonamento(String id, String nome, LocalTime horaInicio, LocalTime horaFim) {
         this(id, nome, TipoEscalonamento.INTERVALO, null, horaInicio, horaFim, null);
     }
@@ -81,12 +79,10 @@ public class Escalonamento implements Serializable {
         this.ativo = true;
     }
 
-    // -------------------------------------------------------------------------
-    // Gestão de acções
-    // -------------------------------------------------------------------------
+    // Gestão de açoes
 
     public void adicionarAcao(Acao acao) {
-        if (acao == null) throw new IllegalArgumentException("Acção não pode ser nula.");
+        if (acao == null) throw new IllegalArgumentException("Ação não pode ser nula.");
         acoes.add(acao);
     }
 
@@ -94,14 +90,12 @@ public class Escalonamento implements Serializable {
         return Collections.unmodifiableList(acoes);
     }
 
-    // -------------------------------------------------------------------------
-    // Avaliação
-    // -------------------------------------------------------------------------
+    // Avaliaçao
 
     /**
      * Verifica se o escalonamento deve ser disparado neste momento.
-     * @param agora Data/hora actual (do relógio interno da simulação).
-     * @return true se as acções devem ser executadas.
+     * @param agora Data/hora atual (do relógio interno da simulaçao).
+     * @return true se as açoes devem ser executadas.
      */
     public boolean deveExecutar(LocalDateTime agora) {
         if (!ativo) return false;
@@ -130,7 +124,7 @@ public class Escalonamento implements Serializable {
     }
 
     /**
-     * Avalia e executa as acções se for o momento certo.
+     * Avalia e executa as açoes se for o momento certo.
      * @return true se foi executado.
      */
     public boolean avaliarEExecutar(LocalDateTime agora) {
@@ -142,13 +136,11 @@ public class Escalonamento implements Serializable {
         return false;
     }
 
-    // -------------------------------------------------------------------------
     // Getters / Setters
-    // -------------------------------------------------------------------------
 
     public String getId()                    { return id; }
     public String getNome()                  { return nome; }
-    public boolean isActivo()                { return ativo; }
+    public boolean isAtivo()                { return ativo; }
     public TipoEscalonamento getTipo()       { return tipo; }
     public LocalTime getHoraExecucao()       { return horaExecucao; }
     public LocalTime getHoraInicio()         { return horaInicio; }
@@ -156,12 +148,10 @@ public class Escalonamento implements Serializable {
     public Set<DayOfWeek> getDiasDaSemana()  { return diasDaSemana; }
     public LocalDateTime getUltimaExecucao() { return ultimaExecucao; }
 
-    public void setActivo(boolean activo) { this.ativo = activo; }
+    public void setAtivo(boolean ativo) { this.ativo = ativo; }
     public void setNome(String nome)      { this.nome = nome; }
 
-    // -------------------------------------------------------------------------
     // toString
-    // -------------------------------------------------------------------------
 
     @Override
     public String toString() {
@@ -179,7 +169,7 @@ public class Escalonamento implements Serializable {
             default:
                 detalhes = "";
         }
-        return String.format("Escalonamento [%s] '%s' | %s | Acções: %d | %s",
+        return String.format("Escalonamento [%s] '%s' | %s | Ações: %d | %s",
                 id, nome, detalhes, acoes.size(), ativo ? "ATIVO" : "INATIVO");
     }
 

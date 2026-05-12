@@ -15,9 +15,7 @@ public abstract class DispositivoComAbertura extends Dispositivo {
         this.percentagemAbertura = 0;
     }
 
-    // -------------------------------------------------------------------------
     // Operações de abertura
-    // -------------------------------------------------------------------------
 
     public void abrir() {
         setPercentagemAbertura(100);
@@ -37,18 +35,14 @@ public abstract class DispositivoComAbertura extends Dispositivo {
         if (percentagem == 0 && estaLigado()) super.desligar();
     }
 
-    // -------------------------------------------------------------------------
     // Getters
-    // -------------------------------------------------------------------------
 
     public int getPercentagemAbertura() { return percentagemAbertura; }
 
     public boolean estaAberto()         { return percentagemAbertura == 100; }
     public boolean estaFechado()        { return percentagemAbertura == 0; }
 
-    // -------------------------------------------------------------------------
     // Estado detalhado
-    // -------------------------------------------------------------------------
 
     @Override
     public String getEstadoDetalhado() {

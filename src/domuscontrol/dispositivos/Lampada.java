@@ -18,9 +18,7 @@ public class Lampada extends Dispositivo {
     private static final int TEMP_MIN = 2700;
     private static final int TEMP_MAX = 4000;
 
-    // -------------------------------------------------------------------------
     // Construtores
-    // -------------------------------------------------------------------------
 
     public Lampada(String id, String marca, String modelo, double consumoPorHora, boolean temCor) {
         super(id, marca, modelo, consumoPorHora);
@@ -33,9 +31,7 @@ public class Lampada extends Dispositivo {
         this(id, marca, modelo, consumoPorHora, false);
     }
 
-    // -------------------------------------------------------------------------
     // Operações específicas
-    // -------------------------------------------------------------------------
 
     public void setIntensidade(int intensidade) {
         if (intensidade < 0 || intensidade > 100)
@@ -55,17 +51,13 @@ public class Lampada extends Dispositivo {
         this.temperaturaKelvin = kelvin;
     }
 
-    // -------------------------------------------------------------------------
     // Getters
-    // -------------------------------------------------------------------------
 
     public int getIntensidade()       { return intensidade; }
     public boolean isTemCor()         { return temCor; }
     public int getTemperaturaKelvin() { return temperaturaKelvin; }
 
-    // -------------------------------------------------------------------------
     // Estado detalhado
-    // -------------------------------------------------------------------------
 
     @Override
     public String getEstadoDetalhado() {

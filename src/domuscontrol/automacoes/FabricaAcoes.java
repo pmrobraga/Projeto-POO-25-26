@@ -3,7 +3,7 @@ package domuscontrol.automacoes;
 import domuscontrol.dispositivos.*;
 
 /**
- * Ação: ligar um dispositivo.
+ * Açao: ligar um dispositivo
  */
 class AcaoLigar implements Acao {
     private final Dispositivo dispositivo;
@@ -24,7 +24,7 @@ class AcaoLigar implements Acao {
 }
 
 /**
- * Ação: desligar um dispositivo.
+ * Ação: desligar um dispositivo
  */
 class AcaoDesligar implements Acao {
     private final Dispositivo dispositivo;
@@ -45,7 +45,7 @@ class AcaoDesligar implements Acao {
 }
 
 /**
- * Ação: definir a intensidade de uma lâmpada.
+ * Ação: definir a intensidade de uma lâmpada
  */
 class AcaoDefinirIntensidade implements Acao {
     private final Lampada lampada;
@@ -69,7 +69,7 @@ class AcaoDefinirIntensidade implements Acao {
 }
 
 /**
- * Ação: definir o volume de uma coluna de som.
+ * Ação: definir o volume de uma coluna de som
  */
 class AcaoDefinirVolume implements Acao {
     private final ColunaDeSom coluna;
@@ -116,7 +116,7 @@ class AcaoDefinirAbertura implements Acao {
 }
 
 /**
- * Fábrica de ações — centraliza a criação de acções concretas.
+ * Fábrica de ações — criação de ações concretas.
  * Evita que o resto do código precise de conhecer as subclasses.
  */
 public class FabricaAcoes {

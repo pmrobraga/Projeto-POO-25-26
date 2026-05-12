@@ -21,9 +21,7 @@ public class Divisao implements Serializable {
     private String nome;
     private final List<Dispositivo> dispositivos;
 
-    // -------------------------------------------------------------------------
     // Construtor
-    // -------------------------------------------------------------------------
 
     public Divisao(String id, String nome) {
         if (id == null || id.isBlank())
@@ -35,9 +33,7 @@ public class Divisao implements Serializable {
         this.dispositivos = new ArrayList<>();
     }
 
-    // -------------------------------------------------------------------------
     // Gestão de dispositivos
-    // -------------------------------------------------------------------------
 
     public void adicionarDispositivo(Dispositivo d) throws DispositivoJaExisteException {
         if (d == null) throw new IllegalArgumentException("Dispositivo não pode ser nulo.");
@@ -67,9 +63,7 @@ public class Divisao implements Serializable {
         return dispositivos.size();
     }
 
-    // -------------------------------------------------------------------------
     // Consumo da divisão
-    // -------------------------------------------------------------------------
 
     public double getConsumoTotal() {
         return dispositivos.stream()
@@ -77,16 +71,14 @@ public class Divisao implements Serializable {
                 .sum();
     }
 
-    public double getConsumoPorHoraActual() {
+    public double getConsumoPorHoraAtual() {
         return dispositivos.stream()
                 .filter(Dispositivo::estaLigado)
                 .mapToDouble(Dispositivo::getConsumoPorHora)
                 .sum();
     }
 
-    // -------------------------------------------------------------------------
     // Getters / Setters
-    // -------------------------------------------------------------------------
 
     public String getId()   { return id; }
     public String getNome() { return nome; }
@@ -97,9 +89,7 @@ public class Divisao implements Serializable {
         this.nome = nome;
     }
 
-    // -------------------------------------------------------------------------
     // toString
-    // -------------------------------------------------------------------------
 
     @Override
     public String toString() {
